@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+                           _     _
+   ,,,,,,,,,,,,,,,,,,,,,,,  \   /
+ / (  (  (  (  (  (  (  (  \( = =)
+<  (  (  (  (  (  (  (  (  / ( ^ )
+ \ (__(__(__(__(__(__(__(__)   ~      HI!
+   ^  ^  ^  ^  ^  ^  ^  ^  ^
+-->
 <head>
     <meta charset="UTF-8">
-    <title>Nope</title>
+    <title>nope</title>
+    <style>
+        @keyframes shake {
+          10%, 90% {transform: translate3d(-1px, 0, 0);}
+          20%, 80% {transform: translate3d(2px, 0, 0);}
+          30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+          40%, 60% {transform: translate3d(4px, 0, 0);}
+        }
+    </style>
 </head>
-<body>
-  Not that simple.
+<body style="background-color: #111010">
+<div style="
+  position: fixed;
+  top: 50%;
+  color: #d5d5d5;
+  width: 100%;
+  text-align: center;
+  animation: shake 3s infinite cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+">
+    <h1>not that simple.</h1>
+</div>
 </body>
 </html>

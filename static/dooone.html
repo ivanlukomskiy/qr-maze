@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+                           _     _
+   ,,,,,,,,,,,,,,,,,,,,,,,  \   /
+ / (  (  (  (  (  (  (  (  \( = =)
+<  (  (  (  (  (  (  (  (  / ( ^ )
+ \ (__(__(__(__(__(__(__(__)   ~      HI!
+   ^  ^  ^  ^  ^  ^  ^  ^  ^
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>HHHIIIIIIII!!!!!!11111</title>
+    <style>
+        @keyframes flashy {
+          10% {background-color: red;}
+          20% {background-color: #ffae00;}
+          30% {background-color: #99ff00;}
+          40% {background-color: #00ff80;}
+          50% {background-color: #00ffd9;}
+          60% {background-color: #003cff;}
+          70% {background-color: #6600ff;}
+          80% {background-color: #ee00ff;}
+          90% {background-color: #ff0099;}
+          100% {background-color: #492c37;}
+        }
+        @keyframes shake {
+          10%, 90% {transform: translate3d(-1px, 0, 0);}
+          20%, 80% {transform: translate3d(2px, 0, 0);}
+          30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+          40%, 60% {transform: translate3d(4px, 0, 0);}
+        }
+        @keyframes rotating {
+          25%, 75% {transform: rotate(0deg);}
+          0% {transform: rotate(-30deg);}
+          50% {transform: rotate(30deg);}
+        }
+        @keyframes moving {
+          0% {top: 20%; left: 10%}
+          25% {top: 80%; left: 10%}
+          50% {top: 80%; left: 90%}
+          75% {top: 20%; left: 90%}
+        }
+        h1 {
+            text-align: center;
+        }
+        .dog {
+            width: 100px;
+            height: 100px;
+            left: 20%;
+            top: 20%;
+            background-image: url('dog.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            animation: moving 4s infinite;
+        }
+    </style>
+</head>
+<body style="background-color: #1a1515;
+animation: flashy 3s infinite
+">
+<div style="
+  position: fixed;
+  top: 40%;
+  color: #000000;
+  width: 100%;
+  animation: shake 0.2s infinite cubic-bezier(.36,.07,.19,.97),
+            rotating 3s infinite cubic-bezier(.36,.07,.19,.97);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+">
+    <h1 style="font-size: 32pt;">YOU GOT IT</h1>
+    <h1 style="font-size: 60pt;">HAPPY NEW YEAR</h1>
+</div>
+<div class="dog" style="animation-delay: -1s"></div>
+<div class="dog" style="animation-delay: -1.5s"></div>
+<div class="dog" style="animation-delay: -0.5s"></div>
+<div class="dog"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    const renderer = new THREE.WebGLRenderer( { alpha: true } );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    const cubes = [];
+
+    function getCube(phaseX, phaseY, rate, rotSpeed, amplitudeX, amplitudeY, color) {
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial( { color } );
+        const cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+        return {phaseX, phaseY, rate, rotSpeed,amplitudeX, amplitudeY, cube};
+    }
+    cubes.push(getCube(1, 0, 10, 0.01, 5, 5, '#34f000'))
+    cubes.push(getCube(2, 4, 8, 0.1, 3, 3, '#0030f0'))
+    cubes.push(getCube(7, 1, 11, 0.06, 6, 2, '#f0d000'))
+    cubes.push(getCube(3, 4, 3, 0.01, 5, 9, '#f000dc'))
+    cubes.push(getCube(4, 4, 12, 0.02, 1, 4, '#2e8132'))
+    cubes.push(getCube(5, 4, 7, 0.03, 3, 2, '#0094f0'))
+    cubes.push(getCube(6, 3, 3, 0.04, 6, 4, '#265d14'))
+
+    camera.position.z = 5;
+
+    var tick = 0;
+
+    function animate() {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+        for(const cubeConf of cubes) {
+            const cube = cubeConf['cube'];
+            cube.rotation.x += cubeConf['rotSpeed'];
+            cube.rotation.y += cubeConf['rotSpeed'];
+            cube.position.x = Math.sin(tick / cubeConf['rate'] + cubeConf['phaseX']) * cubeConf['amplitudeX'];
+            cube.position.y = Math.sin(tick / cubeConf['rate'] + cubeConf['phaseY']) * cubeConf['amplitudeY'];
+        }
+        camera.position.y = Math.sin(tick / 100) * 5
+        camera.position.x = Math.sin(tick / 100) * 5
+        camera.lookAt(0,0,0)
+        tick += 1;
+    }
+    animate();
+</script>
+</body>
+</html>
