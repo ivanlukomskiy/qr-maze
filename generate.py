@@ -13,10 +13,10 @@ LEN = 8
 
 
 def generate_image(text, filename):
-    # img = qrcode.make(text)
-    # if not os.path.exists(QR_DIR):
-    #     os.makedirs(QR_DIR)
-    # img.save(f"{QR_DIR}/{filename}.png")
+    img = qrcode.make(text)
+    if not os.path.exists(QR_DIR):
+        os.makedirs(QR_DIR)
+    img.save(f"{QR_DIR}/{filename}.png")
     pass
 
 
