@@ -13,6 +13,7 @@ LEN = 8
 
 
 def generate_image(text, filename):
+    print(filename)
     img = qrcode.make(text)
     if not os.path.exists(QR_DIR):
         os.makedirs(QR_DIR)
@@ -65,16 +66,21 @@ while len(nodes) > 0 and iterations < 5000:
     r = random.random()
     node, idx = nodes.pop()
     print(iterations, idx)
+    # if node == 'Q1UP2WBP':
+    #     print('found1222-----------------------')
+    # print(node)
 
     if idx > LENGTH_LIMIT or r > 0.99:
         # terminate
         dead_ends += 1
         before_dead_end_nodes.append(node)
 
-    elif r < 0.1:
+    elif r < 0.093:
         # split
         next1 = get_random_id()
         next2 = get_random_id()
+        # if next1 == 'Q1UP2WBP' or next2 == 'Q1UP2WBP':
+        #     print('FOUND')
         generate_image(f'Beware it\'s a split, would you go /{next1}.png or /{next2}.png ?', node)
         nodes.append((next1, idx + 1))
         nodes.append((next2, idx + 1))

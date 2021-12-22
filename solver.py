@@ -4,7 +4,8 @@ import subprocess
 
 import requests as requests
 
-START_PAGE = 'http://51.250.1.88/entrypoint.png'
+PREF = 'http://51.250.1.88'
+START_PAGE = '/entrypoint.png'
 TMP_IMG = 'tmp.png'
 
 def parse(link):
@@ -13,10 +14,18 @@ def parse(link):
         handler.write(img_data)
 
     res = subprocess.check_output(['zbarimg', 'tmp.png'])
-    res = re.findall('QR-Code:(.*)\\n', res.decode("utf-8"))[0]
+    try:
+        res = re.findall('(/\w+.png)', res.decode("utf-8"))
+    except:
+        print(f'res was {res}')
     return res
 
+i = 0
 addr = START_PAGE
+visited = set()
+
 while True:
-    addr = parse(addr)
-    print(addr)
+    addresses = parse(PREF + addr)
+    addr = addresses[0]
+    print(f'{i}: {addr}')
+    i += 1
