@@ -113,9 +113,9 @@ i = 0
 code = get_random_id()
 for node in before_dead_end_nodes:
     if i < LEN:
-        generate_image(f'You\'ve find key [{i}], it\'s "{code[i]}", but what\'s next?', node)
+        generate_image(f'You\'ve found key [{i}], it\'s "{code[i]}", but what\'s next?', node)
     else:
-        generate_image('Oh no, it\' a dead end!', node)
+        generate_image('Oh no, it is a dead end!', node)
     i += 1
 
 print(f'code is {code}')
