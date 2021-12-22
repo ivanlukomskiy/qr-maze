@@ -13,10 +13,11 @@ LEN = 8
 
 
 def generate_image(text, filename):
-    img = qrcode.make(text)
-    if not os.path.exists(QR_DIR):
-        os.makedirs(QR_DIR)
-    img.save(f"{QR_DIR}/{filename}.png")
+    # img = qrcode.make(text)
+    # if not os.path.exists(QR_DIR):
+    #     os.makedirs(QR_DIR)
+    # img.save(f"{QR_DIR}/{filename}.png")
+    pass
 
 
 def get_random_id():
@@ -29,20 +30,20 @@ passed_ids = set()
 # generate sequence first
 for _ in range(316):
     new_id = get_random_id()
-    generate_image(f'http://{IP}/{new_id}', prev_id)
+    generate_image(f'http://{IP}/{new_id}.png', prev_id)
     passed_ids.add(prev_id)
     prev_id = new_id
 
 # now generate killer
 new_id = get_random_id()
-generate_image(f'ahhahha and here http://{IP}/{new_id} you script crashes lol', prev_id)
+generate_image(f'ahhahha and here http://{IP}/{new_id}.png you script crashes lol', prev_id)
 passed_ids.add(prev_id)
 prev_id = new_id
 
 # now walk a bit more
 for _ in range(33):
     new_id = get_random_id()
-    generate_image(f'http://{IP}/{new_id}', prev_id)
+    generate_image(f'http://{IP}/{new_id}.png', prev_id)
     passed_ids.add(prev_id)
     prev_id = new_id
 
@@ -74,7 +75,7 @@ while len(nodes) > 0 and iterations < 5000:
         # split
         next1 = get_random_id()
         next2 = get_random_id()
-        generate_image(f'Beware it\'s a split, would you go /{next1} or /{next2} ?', node)
+        generate_image(f'Beware it\'s a split, would you go /{next1}.png or /{next2}.png ?', node)
         nodes.append((next1, idx + 1))
         nodes.append((next2, idx + 1))
         split += 1
@@ -82,14 +83,14 @@ while len(nodes) > 0 and iterations < 5000:
     elif r < 0.95:
         # straight
         next_point = get_random_id()
-        generate_image(f'http://{IP}/{next_point}', node)
+        generate_image(f'http://{IP}/{next_point}.png', node)
         nodes.append((next_point, idx + 1))
         middle += 1
 
     else:
         # make a loop
         next = random.choice(list(passed_ids))
-        generate_image(f'http://{IP}/{next}', node)
+        generate_image(f'http://{IP}/{next}.png', node)
         loops += 1
 
     iterations += 1
@@ -111,6 +112,7 @@ for node in before_dead_end_nodes:
         generate_image('Oh no, it\' a dead end!', node)
     i += 1
 
+print(f'code is {code}')
 # done ?
 # add winnind slide
 generate_image(f'http://{IP}/dooone.html', code)

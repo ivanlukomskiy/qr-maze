@@ -1,0 +1,1 @@
+zbarimg tmp.png
