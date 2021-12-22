@@ -113,4 +113,4 @@ for node in before_dead_end_nodes:
 
 # done ?
 # add winnind slide
-generate_image('Winning slide', code)
+generate_image(f'http://{IP}/dooone.html', code)
