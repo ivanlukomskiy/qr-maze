@@ -20,7 +20,7 @@ def generate_image(text, filename):
 
 
 def get_random_id():
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(LEN)) + '.png'
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(LEN))
 
 
 prev_id = 'entrypoint'
